@@ -1,0 +1,14 @@
+{
+  "version": "1.0.0",
+  "profileView": {
+    "content": "世界你好"
+  },
+  "sidebar": {
+    "userProfileItem": {
+      "title": "个人资料"
+    },
+    "newsItem": {
+      "title": "今日消息"
+    }
+  }
+}

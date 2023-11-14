@@ -1,13 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <link rel="icon" href="/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vite App</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/favicon~1.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DDNet Query Site</title>
+  <style>
+    #loader-mask {
+      position: absolute;
+      display: flex;
+      width: 100vw;
+      height: 100vh;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: #E4E4E4;
+    }
+
+    #loader-mask>span {
+      color: var(--Text-alpha-25, rgba(0, 0, 0, 0.25));
+      text-align: center;
+      font-family: Times New Roman;
+      font-size: 32px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      letter-spacing: 0.32px;
+      animation: ani-loader-text 1s ease-out infinite;
+    }
+
+    #loader-img {
+      animation: ani-loader 5s linear infinite;
+    }
+
+    @keyframes ani-loader {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes ani-loader-text {
+      from {
+        opacity: 1;
+      }
+
+      to {
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="loader-mask">
+    <img id="loader-img" src="./loader.svg" alt="loading">
+    <span>loading</span>
+  </div>
+  <div id="ddnet-app"></div>
+  <script type="module" src="./src/main.ts"></script>
+  <script>
+    function hideLoaderMask() {
+      let loaderMask = document.getElementById("loader-mask");
+      loaderMask.remove();
+    }
+  </script>
+</body>
+
 </html>
