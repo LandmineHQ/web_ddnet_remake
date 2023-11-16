@@ -1,14 +1,31 @@
 {
   "version": "1.0.0",
-  "profileView": {
-    "content": "世界你好"
-  },
   "sidebar": {
+    "null": "暂无",
     "userProfileItem": {
       "title": "个人资料"
     },
     "newsItem": {
       "title": "今日消息"
     }
-  }
+  },
+  "components": {
+    "profile_card_component": {
+      "progress": {
+        "title1": "地图",
+        "title2": "分数"
+      },
+      "region_rank_title": "分数排名",
+      "rank": "Rank",
+      "mini_card_title": {
+        "title1": "通关耗时",
+        "title2": "发布皮肤",
+        "title3": "发布地图",
+        "title4": "PPH",
+        "title5": "TOP 1",
+        "title6": "TOP 10"
+      }
+    }
+  },
+  "view": {}
 }
