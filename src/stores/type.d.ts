@@ -1,11 +1,27 @@
-type Points = { points: number, rank: number }
-type TotalPoints = { total: number } & Points
+type Points = { points: number, rank: number } | null
+type TotalPoints = { total: number } & Points | null
 
 type MapTypes = "Novice" | "Moderate" | "Brutal" | "Insane" | "Dummy" | "DDmaX.Easy" | "DDmaX.Next" | "DDmaX.Pro" | "DDmaX.Nut" | "Oldschool" | "Solo" | "Race" | "Fun"
 
-type MapRecord = { timestamp: number, map: string, time: number }
-type MapRecordLastFinished = MapRecord & { country: Countries, type: MapTypes }
-type MapFinished = Points & { total_finishes: number, finishes: number, time: number, first_finish: number }
+type MapRecord = {
+    timestamp: number,
+    map: string,
+    time: number
+}
+type MapRecordLastFinished = MapRecord & {
+    country: Countries,
+    type: MapTypes
+}
+type MapFinished = {
+    points: number,
+    total_finishes: number,
+    finishes: number,
+    team_rank?: number,
+    rank?: number,
+    time?: number,
+    first_finish?: number,
+}
+
 type MapTypePoints = {
     [key in MapTypes]: {
         points: TotalPoints
@@ -30,7 +46,8 @@ type PlayerInfo = {
     hours_played_past_365_days: number
 }
 
-interface UserInfo {
+type UserInfo = {
+    date: Ref<string>
     name: Ref<String>
     country: Ref<Countries>
     skin: Ref<String>

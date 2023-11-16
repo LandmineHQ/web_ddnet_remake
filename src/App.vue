@@ -28,6 +28,8 @@ import SiderBarComponent from './components/SiderBarComponent/index.vue';
 
 <style scoped lang="scss">
 .app-container {
+  width: 100%;
+  height: 100vh;
   display: inline-flex;
   justify-content: center;
   align-items: flex-start;

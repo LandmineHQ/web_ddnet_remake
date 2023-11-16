@@ -1,14 +1,27 @@
 import { get } from "idb-keyval";
 import useUserInfoStore from "./user";
-import { ref } from "vue";
 
 // get indexedDB object
-get("user").then((user) => {
-    if (!user) return
-    useUserInfoStore().name = ref(user.name)
-    useUserInfoStore().country = ref(user.country)
-    useUserInfoStore().skin = ref(user.skin)
-    useUserInfoStore().details = ref(user.details)
-}).catch((error) => {
-    console.warn("Error getting", error)
-})
+async function getUser() {
+    let flag = false;
+    await get("user").then((userString) => {
+        if (!userString) return
+        console.log("readding indexedDB user");
+        const user = JSON.parse(userString) as UserInfo
+        // eslint-disable-next-line prefer-const
+        for (let key in user) {
+            // @ts-ignore
+            useUserInfoStore()[key] = user[key]
+        }
+        console.log("read successfully")
+        flag = true
+    }).catch((error) => {
+        console.warn("Error getting", error)
+    })
+
+    return flag
+}
+
+export default {
+    getUser
+}
