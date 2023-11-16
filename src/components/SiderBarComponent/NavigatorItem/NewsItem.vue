@@ -3,7 +3,7 @@
         <template #title>{{ $t("sidebar.newsItem.title") }}</template>
         <template #default>
             <div class="content">
-
+                {{ $t("sidebar.null") }}
             </div>
         </template>
     </ItemComponent>

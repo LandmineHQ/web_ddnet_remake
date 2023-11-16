@@ -3,7 +3,7 @@
         <template #title>{{ $t("sidebar.userProfileItem.title") }}</template>
         <template #default>
             <div class="content">
-                <img src="@/assets/default_skin.svg" alt="default_skin">
+                <img src="@/assets/icons/default_skin.svg" alt="default_skin">
                 <div>{{ useUserInfoStore().name }}</div>
             </div>
         </template>
