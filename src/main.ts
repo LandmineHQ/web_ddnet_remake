@@ -5,9 +5,9 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import i18n from './i18n'
-import pinia from './stores'
+import { autoUpdatePinia, pinia } from './stores'
 
-import update from './stores/update'
+import UserIndexedDB from './stores/UserIndexedDB'
 
 const app = createApp(App)
 
@@ -15,9 +15,10 @@ app.use(router)
 app.use(i18n)
 app.use(pinia)
 
-if (await update.getUser() === false) {
+if (await UserIndexedDB.getUser() === false) {
     console.log("read failed");
 }
+autoUpdatePinia()
 
 app.mount('#ddnet-app')
 

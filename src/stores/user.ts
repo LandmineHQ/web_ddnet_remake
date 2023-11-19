@@ -3,15 +3,18 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 
 const state: UserInfo = {
-    date: ref(moment(new Date("2023-11-11")).format("YYYY-MM-DD")),
+    date: ref(moment(new Date()).format("YYYY-MM-DD")),
     name: ref<String>("nameless tee"),
     country: ref<Countries>("default"),
-    skin: ref<String>("default"),
-    details: ref<PlayerInfo>(),
+    skinName: ref<String>("log.svg"),
+    skinSrcPath: ref<String>("./src/assets/svg/logo.svg"),
+    playerInfo: ref<PlayerInfo>({} as PlayerInfo),
+    mappersInfo: ref<MappersData>({} as MappersData),
+    teedataAuthorInfo: ref<TeeData_Author>({} as TeeData_Author),
+    stamp: ref<Date>(new Date()),
 }
 
 const getters = {
-
 };
 
 const actions = {};

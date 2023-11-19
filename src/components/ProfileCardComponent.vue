@@ -7,7 +7,7 @@
             </div>
             <div class="content">
                 <div class="skin">
-                    <img src="@/assets/icons/default_skin.svg" alt="default_skin">
+                    <canvas ref="skinCanvas"></canvas>
                 </div>
                 <div class="name">{{ useUserInfoStore().name }}</div>
                 <div class="countryIcon">
@@ -113,7 +113,8 @@
                 }">
                 </div>
                 <div class="title">{{ $t("components.profile_card_component.progress.title1") }}</div>
-                <div class="content">{{ `${cardProperties.progress.map.finished} / ${cardProperties.progress.map.total}` }}
+                <div class="content">{{ `${cardProperties.progress.map.finished.toFixed(0)} /
+                                    ${cardProperties.progress.map.total.toFixed(0)}` }}
                 </div>
             </div>
             <div class="progress2">
@@ -122,8 +123,8 @@
                 }">
                 </div>
                 <div class="title">{{ $t("components.profile_card_component.progress.title2") }}</div>
-                <div class="content">{{ `${cardProperties.progress.points.now} / ${cardProperties.progress.points.total}` }}
-                </div>
+                <div class="content">{{ `${Math.floor(cardProperties.progress.points.now)} /
+                                    ${Math.floor(cardProperties.progress.points.total)}` }}</div>
             </div>
         </div>
         <div class="bottom">
@@ -133,13 +134,13 @@
                         <div class="country">{{ useUserInfoStore().country }}</div>
                         <div class="content">{{ $t("components.profile_card_component.region_rank_title") }}</div>
                     </div>
-                    <div class="content"># {{ cardProperties.pointsRank }}</div>
+                    <div class="content"># {{ Math.floor(cardProperties.pointsRank) }}</div>
                 </div>
                 <div class="rank">
                     <div class="title">
                         <div class="country">{{ $t("components.profile_card_component.rank") }}</div>
                     </div>
-                    <div class="content"># {{ cardProperties.rank }}</div>
+                    <div class="content"># {{ Math.floor(cardProperties.rank) }}</div>
                 </div>
             </div>
             <div class="right">
@@ -155,25 +156,49 @@
 
 <script setup lang="ts">
 import useUserInfoStore from '@/stores/user';
-import { reactive } from 'vue';
+import { reactive, ref, computed, getCurrentInstance } from 'vue';
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n()
-// get computed card properties
+
+import { OnSVGRender, OnTeeSkinRender } from '@/tools/tee';
+import { watch } from 'vue';
+import gsap from 'gsap';
+// get computed card properties & autoupdate
 const cardProperties = getCardProperties()
-
+watch(() => useUserInfoStore().stamp, () => {
+    console.log(getCurrentInstance.name, `detected userinfo date stamp changed`)
+    updateProfileCard(cardProperties, getCardProperties())
+})
 // format mini card properties
-const miniCards = [
-    { title: t("components.profile_card_component.mini_card_title.title1"), content: Math.floor(cardProperties.miniCard.totalTimeOfFinishingMaps / 3600) + " h" },
-    { title: t("components.profile_card_component.mini_card_title.title2"), content: cardProperties.miniCard.releaseSkins },
-    { title: t("components.profile_card_component.mini_card_title.title3"), content: cardProperties.miniCard.releaseMaps },
-    { title: t("components.profile_card_component.mini_card_title.title4"), content: Math.floor(cardProperties.miniCard.pph * 100) / 100 },
-    { title: t("components.profile_card_component.mini_card_title.title5"), content: cardProperties.miniCard.top1 },
-    { title: t("components.profile_card_component.mini_card_title.title6"), content: cardProperties.miniCard.top10 },
-]
+const miniCards = computed(() => {
+    return [
+        { title: t("components.profile_card_component.mini_card_title.title1"), content: Math.floor(cardProperties.miniCard.totalTimeOfFinishingMaps / 3600) + " h" },
+        { title: t("components.profile_card_component.mini_card_title.title2"), content: Math.floor(cardProperties.miniCard.releaseSkins) },
+        { title: t("components.profile_card_component.mini_card_title.title3"), content: Math.floor(cardProperties.miniCard.releaseMaps) },
+        { title: t("components.profile_card_component.mini_card_title.title4"), content: Math.floor(cardProperties.miniCard.pph * 100) / 100 },
+        { title: t("components.profile_card_component.mini_card_title.title5"), content: Math.floor(cardProperties.miniCard.top1) },
+        { title: t("components.profile_card_component.mini_card_title.title6"), content: Math.floor(cardProperties.miniCard.top10) },
+    ]
+})
 
+// the elements of the skin canvas,which is used to render the skin image
+const skinCanvas = ref<HTMLCanvasElement>();
+
+// reactive skin src
+const img = new Image()
+updateSkin(useUserInfoStore().skinSrcPath)
+watch(() => useUserInfoStore().skinSrcPath, (value) => {
+    updateSkin(value)
+}, { deep: true })
+
+defineExpose({
+    cardProperties
+})
+
+// =================================================================
 /**
  * getCardProperties
- * 
+ * maybe have no need any documentation
  */
 function getCardProperties() {
     let cardProperties = reactive({
@@ -198,14 +223,17 @@ function getCardProperties() {
             top10: 0,
         }
     })
+    const playersInfo = useUserInfoStore().playerInfo as PlayerInfo
+    const mappersInfo = useUserInfoStore().mappersInfo as MappersData
+    const authorInfo = useUserInfoStore().teedataAuthorInfo as TeeData_Author
 
-    const details = useUserInfoStore().details as PlayerInfo
+    if (!playersInfo) return cardProperties
     // step 1: get progress.points & pointsRank
-    cardProperties.progress.points.now = details.points ? details.points.points : 0
-    cardProperties.progress.points.total = details.points ? details.points.total : 0
-    cardProperties.pointsRank = details.points ? details.points.rank : 0
+    cardProperties.progress.points.now = playersInfo.points ? playersInfo.points.points : 0
+    cardProperties.progress.points.total = playersInfo.points ? playersInfo.points.total : 0
+    cardProperties.pointsRank = playersInfo.points ? playersInfo.points.rank : 0
     // step 2: get rank
-    cardProperties.rank = details.rank ? details.rank.rank : 0
+    cardProperties.rank = playersInfo.rank ? playersInfo.rank.rank : 0
     // step 3: get 
     // progress.map &
     // miniCard.totalTimeOfFinishingMaps &
@@ -216,8 +244,8 @@ function getCardProperties() {
         let totalFinishedMaps = 0;
         let top1 = 0;
         let top10 = 0;
-        for (let typeName in details.types) {
-            let type = details.types[typeName as MapTypes]
+        for (let typeName in playersInfo.types) {
+            let type = playersInfo.types[typeName as MapTypes]
             for (let mapName in type.maps) {
                 totalMaps++;
                 let mapItem: MapFinished = type.maps[mapName]
@@ -241,8 +269,51 @@ function getCardProperties() {
     }
     // step 4: get pph(points per hour)
     cardProperties.miniCard.pph = cardProperties.progress.points.now / (cardProperties.miniCard.totalTimeOfFinishingMaps / 3600)
-
+    // step 5: get maps & skins
+    let counts = 0
+    if (mappersInfo.authors) counts = mappersInfo.authors[useUserInfoStore().name]?.total as number
+    cardProperties.miniCard.releaseMaps = counts
+    counts = 0
+    for (let key in authorInfo) {
+        const _count = authorInfo._count as { [key: string]: any }
+        counts += _count[key]
+    }
+    cardProperties.miniCard.releaseSkins = counts
     return cardProperties
+}
+
+function updateSkin(res: string) {
+    img.src = res
+
+    if (res.includes("logo.svg")) {
+        img.onload = () => {
+            OnSVGRender(skinCanvas.value as HTMLCanvasElement, img, 106, 101)
+        }
+    } else {
+        img.onload = () => {
+            OnTeeSkinRender(skinCanvas.value as HTMLCanvasElement, img, 96, 64)
+        }
+    }
+}
+
+/**
+ * use gsap to animate the update of profile cards
+ * @param oldObj
+ * @param newObj 
+ */
+function updateProfileCard(oldObj: { [key: string]: any }, newObj: typeof oldObj) {
+    for (let key in oldObj) {
+        if (!(key in newObj)) continue
+        if (typeof oldObj[key] === "object") {
+            updateProfileCard(oldObj[key], newObj[key])
+            continue
+        }
+        gsap.to(oldObj, {
+            [key]: newObj[key],
+            duration: 2.5,
+            ease: "elastic.out(1,0.4)",
+        })
+    }
 }
 </script>
 
@@ -259,6 +330,7 @@ function getCardProperties() {
 
     >* {
         position: absolute;
+        text-wrap: nowrap;
     }
 }
 
@@ -314,10 +386,8 @@ function getCardProperties() {
             height: 80px;
             position: relative;
 
-            >img {
-                width: 100%;
-                height: 100%;
-            }
+            display: flex;
+            justify-content: center;
         }
 
         >.name {
@@ -466,7 +536,7 @@ function getCardProperties() {
             flex-shrink: 0;
 
             border-radius: 4px;
-            background: radial-gradient(circle at left, #44ACBF 0%, #44ACBF 82.29%, rgba(255, 255, 255, 0.00) 86.46%), #36537E;
+            // background: radial-gradient(circle at left, #44ACBF 0%, #44ACBF 82.29%, rgba(255, 255, 255, 0.00) 86.46%), #36537E;
             box-shadow: 1px 1px 1px 0px rgba(255, 255, 255, 0.25) inset, 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
         }
 
@@ -530,7 +600,7 @@ function getCardProperties() {
             flex-shrink: 0;
 
             border-radius: 4px;
-            background: radial-gradient(circle at left, #44ACBF 0%, #44ACBF 82.29%, rgba(255, 255, 255, 0.00) 86.46%), #36537E;
+            // background: radial-gradient(circle at left, #44ACBF 0%, #44ACBF 82.29%, rgba(255, 255, 255, 0.00) 86.46%), #36537E;
             box-shadow: 1px 1px 1px 0px rgba(255, 255, 255, 0.25) inset, 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
         }
 
@@ -714,4 +784,4 @@ function getCardProperties() {
         }
     }
 }
-</style>
+</style>@/axios/Mappers

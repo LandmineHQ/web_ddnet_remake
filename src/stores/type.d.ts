@@ -50,6 +50,14 @@ type UserInfo = {
     date: Ref<string>
     name: Ref<String>
     country: Ref<Countries>
-    skin: Ref<String>
-    details: Ref<PlayerInfo>
+    skinName: Ref<String>
+    skinSrcPath: Ref<String>
+    playerInfo: Ref<PlayerInfo>
+    mappersInfo: Ref<MappersData>
+    teedataAuthorInfo: Ref<TeeData_Author>
+    /**
+     * @type {Ref<Date>}
+     * @description the userinfo updated date stamp
+     */
+    stamp: Ref<Date>
 }
