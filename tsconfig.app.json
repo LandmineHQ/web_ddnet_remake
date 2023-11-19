@@ -5,7 +5,6 @@
     "src/**/*",
     "src/**/*.vue",
     "src/**/*.json",
-    "src/*.vue",
     "*.json",
   ],
   "exclude": [
