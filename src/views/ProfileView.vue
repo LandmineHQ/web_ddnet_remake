@@ -1,15 +1,20 @@
 <template>
     <div class="ddnet-profile">
         <ViewInstructionComponent>{{ $t("sidebar.userProfileItem.title") }}</ViewInstructionComponent>
-        <ProfileCardComponent />
-        <DebugComponent />
+        <ProfileCardComponent ref="profileCard" />
+        <DebugComponent :component="profileCard" />
+        <FooterComponentVue />
     </div>
 </template>
 
 <script setup lang="ts">
 import ViewInstructionComponent from "@/components/ViewInstructionComponent.vue";
 import ProfileCardComponent from "@/components/ProfileCardComponent.vue";
-import DebugComponent from "@/components/__debugTools__/DebugComponent.vue";
+import DebugComponent from "@/components/__debugC__/DebugComponent.vue";
+import { ref } from "vue";
+import FooterComponentVue from "@/components/FooterComponent.vue";
+
+const profileCard = ref<InstanceType<typeof ProfileCardComponent>>()
 </script>
 
 <style lang="scss" scoped>
