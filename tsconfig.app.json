@@ -10,6 +10,7 @@
   "exclude": [
     "src/**/__tests__/*",
     "src/tools/freshCountryFlags.ts",
+    "src/**/__debugC__/*",
   ],
   "compilerOptions": {
     "composite": true,
