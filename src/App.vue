@@ -27,7 +27,7 @@ import SiderBarComponent from './components/SiderBarComponent/SideBarComponent.v
   width: 100%;
   height: 100vh;
   display: inline-flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
 
   background: var(--BG-color-1, #E4E4E4);
