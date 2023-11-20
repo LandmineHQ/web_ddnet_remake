@@ -1,5 +1,5 @@
 <template>
-    <div class="ddnet-siderbar">
+    <div class="ddnet-siderbar" v-show="!useSideBarStore().hidden">
         <SiderBarLogo />
         <NewsItem />
         <UserProfileItem class="user-profile" />
@@ -10,6 +10,7 @@
 import SiderBarLogo from "@/components/icons/SiderBarLogo.vue"
 import UserProfileItem from "@/components/SiderBarComponent/NavigatorItem/UserProfileItem.vue"
 import NewsItem from "@/components/SiderBarComponent/NavigatorItem/NewsItem.vue"
+import useSideBarStore from "@/stores/sidebar";
 </script>
 <style scoped lang="scss">
 @import url("@/assets/responsive/SiderBarComponent.scss");
