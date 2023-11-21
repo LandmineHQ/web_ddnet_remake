@@ -1,9 +1,11 @@
 <template>
-    <div class="ddnet-siderbar" v-show="!useSideBarStore().hidden">
-        <SiderBarLogo />
-        <NewsItem />
-        <UserProfileItem class="user-profile" />
-    </div>
+    <Transition name="ddnet-sidebar">
+        <div class="ddnet-sidebar" v-if="!useSideBarStore().hidden" ref="sidebar">
+            <SiderBarLogo />
+            <NewsItem />
+            <UserProfileItem class="user-profile" />
+        </div>
+    </Transition>
 </template>
 
 <script setup lang="ts">
@@ -11,11 +13,17 @@ import SiderBarLogo from "@/components/icons/SiderBarLogo.vue"
 import UserProfileItem from "@/components/SiderBarComponent/NavigatorItem/UserProfileItem.vue"
 import NewsItem from "@/components/SiderBarComponent/NavigatorItem/NewsItem.vue"
 import useSideBarStore from "@/stores/sidebar";
+import { ref } from "vue";
+const sidebar = ref<HTMLDivElement>()
+
+defineExpose({
+    element: sidebar
+})
 </script>
 <style scoped lang="scss">
 @import url("@/assets/responsive/components/SiderBarComponent.scss");
 
-.ddnet-siderbar {
+.ddnet-sidebar {
     width: 240px;
     height: 1024px;
 
@@ -25,7 +33,7 @@ import useSideBarStore from "@/stores/sidebar";
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-.ddnet-siderbar>.user-profile {
+.ddnet-sidebar>.user-profile {
     position: absolute;
     bottom: 0;
 
@@ -33,5 +41,16 @@ import useSideBarStore from "@/stores/sidebar";
     height: 82px;
     flex-shrink: 0;
     background: var(--BG-color-4, rgba(255, 255, 255, 0.20));
+}
+
+.ddnet-sidebar-enter-from,
+.ddnet-sidebar-leave-to {
+    opacity: 0;
+    transform: translateX(-100%);
+}
+
+.ddnet-sidebar-enter-active,
+.ddnet-sidebar-leave-active {
+    transition: all 0.5s ease-in-out;
 }
 </style>

@@ -81,7 +81,6 @@
 
 body {
   position: relative;
-  min-height: 100vh;
   /* color: var(--color-text);background: var(--color-background); */
   transition: color 0.5s, background-color 0.5s;
   font-family: 'Times New Roman', Times, serif, Arial, Helvetica, sans-serif;
