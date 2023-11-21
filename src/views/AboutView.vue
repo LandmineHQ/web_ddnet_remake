@@ -1,5 +1,5 @@
 <template>
-    <div class="ddnet-about">
+    <div class="ddnet-view-about">
         <AboutComponent />
         <FooterComponent />
     </div>
@@ -9,7 +9,7 @@ import AboutComponent from '@/components/AboutComponent.vue';
 import FooterComponent from '@/components/FooterComponent.vue';
 </script>
 <style scoped lang="scss">
-.ddnet-about {
+.ddnet-view-about {
     width: 100%;
     padding: 20px;
     gap: 20px;

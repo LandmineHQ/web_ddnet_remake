@@ -6,7 +6,7 @@
                 <span class="date">{{ useUserInfoStore().date }}</span>
             </div>
             <div class="subtitle">
-                <div class="skin">
+                <div class="skin" @click="toggleSettings">
                     <canvas ref="skinCanvas"></canvas>
                 </div>
                 <div class="name">{{ useUserInfoStore().name }}</div>
@@ -150,13 +150,15 @@
                 </div>
             </div>
         </div>
-        <div class="mask"></div>
+        <div class="profile--settings" v-if="toggle.settings">
+            <ProfileSettingsComponentVue @close="toggleSettings" />
+        </div>
     </div>
 </template>
 
 <script setup lang="ts">
 import useUserInfoStore from '@/stores/user';
-import { reactive, ref, computed, getCurrentInstance } from 'vue';
+import { reactive, ref, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n()
 
@@ -164,6 +166,7 @@ import { OnSVGRender, OnTeeSkinRender } from '@/tools/tee';
 import { watch } from 'vue';
 import gsap from 'gsap';
 import router from '@/router';
+import ProfileSettingsComponentVue from './ProfileSettingsComponent.vue';
 // get computed card properties & autoupdate
 const cardProperties = getCardProperties()
 watch(() => useUserInfoStore().stamp, () => {
@@ -192,11 +195,22 @@ watch(() => useUserInfoStore().skinSrcPath, (value) => {
     updateSkin(value)
 }, { deep: true })
 
+// toggle settings view
+const toggle = reactive({
+    settings: false
+})
+
 defineExpose({
     cardProperties
 })
 
 // =================================================================
+
+function toggleSettings(e) {
+    console.log(e)
+    toggle.settings = !toggle.settings
+}
+
 /**
  * getCardProperties
  * maybe have no need any documentation
@@ -319,6 +333,12 @@ function updateProfileCard(oldObj: { [key: string]: any }, newObj: typeof oldObj
 </script>
 
 <style lang="scss" scoped>
+.profile--settings {
+    position: absolute;
+    left: 64px;
+    top: 72px;
+}
+
 .ddnet-card--profile {
     width: 600px;
     height: 350px;
@@ -333,11 +353,6 @@ function updateProfileCard(oldObj: { [key: string]: any }, newObj: typeof oldObj
         position: absolute;
         text-wrap: nowrap;
     }
-}
-
-.ddnet-card--profile>.mask {
-    width: 100%;
-    height: 100%;
 }
 
 .ddnet-card--profile>.top-left {
@@ -389,6 +404,10 @@ function updateProfileCard(oldObj: { [key: string]: any }, newObj: typeof oldObj
 
             display: flex;
             justify-content: center;
+
+            &:hover {
+                cursor: pointer;
+            }
         }
 
         >.name {

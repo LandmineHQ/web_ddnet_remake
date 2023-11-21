@@ -1,5 +1,5 @@
 <template>
-    <div class="ddnet-start">
+    <div class="ddnet-view-start">
         <div class="content">
             <div class="top">
                 <div class="title">初始化</div>
@@ -42,7 +42,7 @@ function next() {
 <style scoped lang="scss">
 @import url("@/assets/responsive/view/StartView.scss");
 
-.ddnet-start {
+.ddnet-view-start {
     display: flex;
     width: 1440px;
     height: 1024px;
@@ -54,7 +54,7 @@ function next() {
     background: var(--BG-color-1, #E4E4E4);
 }
 
-.ddnet-start>.content {
+.ddnet-view-start>.content {
     display: flex;
     width: 427px;
     height: 342px;
