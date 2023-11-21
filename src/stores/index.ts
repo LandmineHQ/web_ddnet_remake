@@ -13,6 +13,12 @@ function autoUpdatePinia() {
     watch(() => useUserInfoStore().skinName, (value, oldValue) => {
         console.log("detected skinName changed from", oldValue, "to", value)
         getSkinSrcPath(value).then(res => useUserInfoStore().skinSrcPath = res)
+        UserIndexedDB.saveIntoIndexedDB()
+    })
+
+    watch(() => useUserInfoStore().country, (value, oldValue) => {
+        console.log("detected country changed from", oldValue, "to", value)
+        UserIndexedDB.saveIntoIndexedDB()
     })
 
     watch(() => useUserInfoStore().name, (value, oldValue) => {

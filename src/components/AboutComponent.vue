@@ -1,5 +1,5 @@
 <template>
-    <div class="ddnet-about--container">
+    <div class="ddnet-about--container" @click="message">
         <div>version:{{ ddnetPack.version }}</div>
         <div>language version: {{ languagePack.version }}</div>
     </div>
@@ -7,11 +7,17 @@
 
 <script setup lang="ts">
 import ddnetPack from "../../package.json";
-import { ref } from "vue";
-let language = navigator.language.toLocaleLowerCase();
-let languagePack = ref({ version: "1.0.0" });
-Promise.all([import(`@/i18n/language/${language}.json`)])
-    .then(([p1]) => {
-        languagePack.value = p1;
-    })
+import languagePack from "../i18n/language/zh_cn.json"
+import { createMessage } from '@/hook/messages/hookMessages'
+
+function message() {
+    createMessage("hello world")
+}
 </script>
+
+<style scoped lang="scss">
+.ddnet-about--container {
+    width: 100%;
+    text-wrap: nowrap;
+}
+</style>@/hook/messages/hookMessages

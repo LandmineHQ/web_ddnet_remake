@@ -10,7 +10,7 @@
 </template>
 
 <style lang="scss" scoped>
-@import url("@/assets/responsive/ViewInstructionComponent.scss");
+@import url("@/assets/responsive/components/ViewInstructionComponent.scss");
 
 .view-instruction {
     display: flex;

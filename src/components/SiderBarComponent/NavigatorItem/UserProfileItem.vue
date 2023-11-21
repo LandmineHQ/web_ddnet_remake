@@ -31,7 +31,7 @@ watch(() => useUserInfoStore().skinSrcPath, updateSkin)
 function updateSkin(res: string) {
     if (res.includes("logo.svg")) {
         img.onload = () => {
-            OnSVGRender(skinCanvas.value as HTMLCanvasElement, img, 106, 101)
+            OnSVGRender(skinCanvas.value as HTMLCanvasElement, img, 113, 107)
         }
     } else {
         img.onload = () => {

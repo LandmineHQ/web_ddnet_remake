@@ -2,10 +2,10 @@
     <div class="ddnet-card--profile">
         <div class="top-left">
             <div class="title">
-                <span class="content">profile</span>
+                <span class="subtitle">profile</span>
                 <span class="date">{{ useUserInfoStore().date }}</span>
             </div>
-            <div class="content">
+            <div class="subtitle">
                 <div class="skin">
                     <canvas ref="skinCanvas"></canvas>
                 </div>
@@ -113,7 +113,7 @@
                 }">
                 </div>
                 <div class="title">{{ $t("components.profile_card_component.progress.title1") }}</div>
-                <div class="content">{{ `${cardProperties.progress.map.finished.toFixed(0)} /
+                <div class="subtitle">{{ `${cardProperties.progress.map.finished.toFixed(0)} /
                                     ${cardProperties.progress.map.total.toFixed(0)}` }}
                 </div>
             </div>
@@ -123,7 +123,7 @@
                 }">
                 </div>
                 <div class="title">{{ $t("components.profile_card_component.progress.title2") }}</div>
-                <div class="content">{{ `${Math.floor(cardProperties.progress.points.now)} /
+                <div class="subtitle">{{ `${Math.floor(cardProperties.progress.points.now)} /
                                     ${Math.floor(cardProperties.progress.points.total)}` }}</div>
             </div>
         </div>
@@ -131,22 +131,22 @@
             <div class="left">
                 <div class="regionRank">
                     <div class="title">
-                        <div class="country">{{ useUserInfoStore().country }}</div>
-                        <div class="content">{{ $t("components.profile_card_component.region_rank_title") }}</div>
+                        <div class="title-main">{{ $t("components.profile_card_component.points_rank.title") }}</div>
+                        <div class="subtitle">{{ $t("components.profile_card_component.points_rank.subtitle") }}</div>
                     </div>
-                    <div class="content"># {{ Math.floor(cardProperties.pointsRank) }}</div>
+                    <div class="subtitle"># {{ Math.floor(cardProperties.pointsRank) }}</div>
                 </div>
                 <div class="rank">
                     <div class="title">
-                        <div class="country">{{ $t("components.profile_card_component.rank") }}</div>
+                        <div class="title-main">{{ $t("components.profile_card_component.rank") }}</div>
                     </div>
-                    <div class="content"># {{ Math.floor(cardProperties.rank) }}</div>
+                    <div class="subtitle"># {{ Math.floor(cardProperties.rank) }}</div>
                 </div>
             </div>
             <div class="right">
                 <div class="mini-card" v-for="(item, index) in miniCards" :key="index">
                     <div class="title">{{ item.title }}</div>
-                    <div class="content">{{ item.content }}</div>
+                    <div class="subtitle">{{ item.content }}</div>
                 </div>
             </div>
         </div>
@@ -163,10 +163,11 @@ const { t } = useI18n()
 import { OnSVGRender, OnTeeSkinRender } from '@/tools/tee';
 import { watch } from 'vue';
 import gsap from 'gsap';
+import router from '@/router';
 // get computed card properties & autoupdate
 const cardProperties = getCardProperties()
 watch(() => useUserInfoStore().stamp, () => {
-    console.log(getCurrentInstance.name, `detected userinfo date stamp changed`)
+    console.log(router.currentRoute.value.name, `detected userinfo date stamp changed`)
     updateProfileCard(cardProperties, getCardProperties())
 })
 // format mini card properties
@@ -287,7 +288,7 @@ function updateSkin(res: string) {
 
     if (res.includes("logo.svg")) {
         img.onload = () => {
-            OnSVGRender(skinCanvas.value as HTMLCanvasElement, img, 106, 101)
+            OnSVGRender(skinCanvas.value as HTMLCanvasElement, img, 113, 107)
         }
     } else {
         img.onload = () => {
@@ -350,7 +351,7 @@ function updateProfileCard(oldObj: { [key: string]: any }, newObj: typeof oldObj
         align-items: baseline;
         gap: 4px;
 
-        >.content {
+        >.subtitle {
             color: var(--BG-color-2, #FFF);
             font-family: Times New Roman;
             font-size: 24px;
@@ -372,7 +373,7 @@ function updateProfileCard(oldObj: { [key: string]: any }, newObj: typeof oldObj
         }
     }
 
-    >.content {
+    >.subtitle {
         width: 299px;
         height: 80px;
         position: relative;
@@ -560,7 +561,7 @@ function updateProfileCard(oldObj: { [key: string]: any }, newObj: typeof oldObj
             letter-spacing: 0.16px;
         }
 
-        >.content {
+        >.subtitle {
             top: 2px;
             left: 206px;
 
@@ -624,7 +625,7 @@ function updateProfileCard(oldObj: { [key: string]: any }, newObj: typeof oldObj
             letter-spacing: 0.16px;
         }
 
-        >.content {
+        >.subtitle {
             top: 2px;
             left: 206px;
 
@@ -679,7 +680,7 @@ function updateProfileCard(oldObj: { [key: string]: any }, newObj: typeof oldObj
                 gap: 4px;
                 align-items: center;
 
-                >.country {
+                >.title-main {
                     color: var(--BG-color-2, #FFF);
                     font-family: Arial;
                     font-size: 16px;
@@ -689,7 +690,7 @@ function updateProfileCard(oldObj: { [key: string]: any }, newObj: typeof oldObj
                     letter-spacing: 0.16px;
                 }
 
-                >.content {
+                >.subtitle {
                     color: var(--BG-color-2, #FFF);
                     font-family: Arial;
                     font-size: 10px;
@@ -700,7 +701,7 @@ function updateProfileCard(oldObj: { [key: string]: any }, newObj: typeof oldObj
                 }
             }
 
-            >.content {
+            >.subtitle {
                 display: flex;
                 width: 122px;
                 height: 39px;
@@ -764,7 +765,7 @@ function updateProfileCard(oldObj: { [key: string]: any }, newObj: typeof oldObj
                 letter-spacing: 0.1px;
             }
 
-            >.content {
+            >.subtitle {
                 display: flex;
                 width: 69px;
                 height: 16px;

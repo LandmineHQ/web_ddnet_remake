@@ -60,4 +60,5 @@ type UserInfo = {
      * @description the userinfo updated date stamp
      */
     stamp: Ref<Date>
+    isFirstComeIn: Ref<boolean>
 }

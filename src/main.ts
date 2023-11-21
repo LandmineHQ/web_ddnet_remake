@@ -10,15 +10,13 @@ import { autoUpdatePinia, pinia } from './stores'
 import UserIndexedDB from './stores/UserIndexedDB'
 
 const app = createApp(App)
-
+app.use(pinia)
+await UserIndexedDB.getUser().then(res => {
+    autoUpdatePinia()
+    if (res === false) console.log("read failed")
+})
 app.use(router)
 app.use(i18n)
-app.use(pinia)
-
-if (await UserIndexedDB.getUser() === false) {
-    console.log("read failed");
-}
-autoUpdatePinia()
 
 app.mount('#ddnet-app')
 

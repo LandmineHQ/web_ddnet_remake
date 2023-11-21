@@ -15,7 +15,10 @@
         "title1": "地图",
         "title2": "分数"
       },
-      "region_rank_title": "分数排名",
+      "points_rank": {
+        "title": "Points",
+        "subtitle": "分数排名"
+      },
       "rank": "Rank",
       "mini_card_title": {
         "title1": "通关耗时",

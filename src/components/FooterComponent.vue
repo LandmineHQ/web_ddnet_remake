@@ -16,9 +16,11 @@ const footer = [{ content: "@2023" },
 </script>
 
 <style scoped lang="scss">
+@import url("@/assets/responsive/components/FooterComponents.scss");
+
 .ddnet-footer {
     display: flex;
-    width: 100%;
+    width: 1440px;
     height: 64px;
     padding: 10px;
     justify-content: center;

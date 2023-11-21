@@ -34,6 +34,9 @@
   --Primary: #409EFF;
   --Border-1: #DCDFE6;
   --Text-5: #333333;
+
+  --Font-family-zh: "Arial";
+  --Font-family-en: "Times New Roman";
 }
 
 /* semantic color variables for this project */

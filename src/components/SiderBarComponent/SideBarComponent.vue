@@ -13,7 +13,7 @@ import NewsItem from "@/components/SiderBarComponent/NavigatorItem/NewsItem.vue"
 import useSideBarStore from "@/stores/sidebar";
 </script>
 <style scoped lang="scss">
-@import url("@/assets/responsive/SiderBarComponent.scss");
+@import url("@/assets/responsive/components/SiderBarComponent.scss");
 
 .ddnet-siderbar {
     width: 240px;
