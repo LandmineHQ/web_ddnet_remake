@@ -77,7 +77,12 @@ async function freshSource() {
 
 async function saveIntoIndexedDB() {
     console.log("saving data from user");
-    const savedData: UserInfo = useUserInfoStore()
+    const savedData = {}
+    for (const key in useUserInfoStore()) {
+        if (key.startsWith("_") || key.startsWith("$")) continue
+        // @ts-ignore
+        savedData[key] = useUserInfoStore()[key]
+    }
     await set("user", JSON.stringify(savedData))
         .then((res) => {
             console.log("saved successfully", res);
