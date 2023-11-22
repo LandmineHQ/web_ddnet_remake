@@ -7,7 +7,7 @@ async function getMappers(): Promise<MappersData | null> {
             return response.data as MappersData
         })
         .catch((error) => {
-            console.log(error)
+            console.log("can't resolve mappers info", error)
             return null
         })
 }
@@ -18,8 +18,9 @@ async function getSkinSrcPath(skinName: string): Promise<string> {
     const skins: SkinsData = await axios.get(URLCONFIG.DEAMON_PROTOCOL_SKINS_URL) // detect ddnetDB
         .then((response) => {
             if (response.status === 200) return response.data
-        }).catch((error) => console.log(error))
+        }).catch((error) => console.log("can't resolve skin name", error))
     let type;
+    if (!skins) return defaultSkin
     for (const item of skins.skins) {
         if (item.name === skinName) {
             type = item.type
@@ -63,7 +64,7 @@ async function getAuthor(name: string): Promise<TeeData_Author> {
         return null
 
     }).catch(err => {
-        console.log(err)
+        console.log("can't resove author info", err)
         return null
     })
     return result
