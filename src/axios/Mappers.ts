@@ -13,7 +13,7 @@ async function getMappers(): Promise<MappersData | null> {
 }
 
 async function getSkinSrcPath(skinName: string): Promise<string> {
-    const defaultSkin = "./src/assets/svg/logo.svg"
+    const defaultSkin = "./img/svg/logo.svg"
     let skinSrcPath: string = defaultSkin
     const skins: SkinsData = await axios.get(URLCONFIG.DEAMON_PROTOCOL_SKINS_URL) // detect ddnetDB
         .then((response) => {

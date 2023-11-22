@@ -11,9 +11,10 @@ import UserIndexedDB from './stores/UserIndexedDB'
 
 const app = createApp(App)
 app.use(pinia)
-await UserIndexedDB.getUser().then(res => {
+UserIndexedDB.getUser().then(res => {
     autoUpdatePinia()
     if (res === false) console.log("read failed")
+    console.log("read success")
 })
 app.use(router)
 app.use(i18n)

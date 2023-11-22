@@ -8,14 +8,14 @@ import { readFileSync, readdirSync, writeFileSync } from "fs"
 import { join } from "path"
 
 const packageInfo = { version: "1.0.3" }
-console.log("================================================")
+console.log("\n================================================")
 console.log(`freshCountryFlags\nversion: ${packageInfo.version}`)
 fresh()
 console.log("================================================")
 
 
 function fresh() {
-    const flagsDirectoryPath = join(__dirname, "../assets/countryflags")
+    const flagsDirectoryPath = join(__dirname, "../../public/img/countryflags")
     console.log("get country flag png files at: " + flagsDirectoryPath)
     const res = readdirSync(flagsDirectoryPath, {
         encoding: "utf8",

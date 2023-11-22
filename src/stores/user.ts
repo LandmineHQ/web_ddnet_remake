@@ -7,7 +7,7 @@ const state: UserInfo = {
     name: ref<String>("system"),
     country: ref<Countries>("default"),
     skinName: ref<String>("log.svg"),
-    skinSrcPath: ref<String>("./src/assets/svg/logo.svg"),
+    skinSrcPath: ref<String>("./img/svg/logo.svg"),
     playerInfo: ref<PlayerInfo>({} as PlayerInfo),
     mappersInfo: ref<MappersData>({} as MappersData),
     teedataAuthorInfo: ref<TeeData_Author>({} as TeeData_Author),

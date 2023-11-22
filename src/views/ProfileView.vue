@@ -1,8 +1,9 @@
 <template>
     <div class="ddnet-view-profile">
         <ViewInstructionComponent>{{ $t("sidebar.userProfileItem.title") }}</ViewInstructionComponent>
-        <ProfileCardComponent ref="profileCard" />
+        <ProfileCardComponent />
         <FooterComponentVue />
+        <DebugComponentVue />
     </div>
 </template>
 
@@ -10,7 +11,7 @@
 import ViewInstructionComponent from "@/components/ViewInstructionComponent.vue";
 import ProfileCardComponent from "@/components/ProfileCardComponent.vue";
 import FooterComponentVue from "@/components/FooterComponent.vue";
-
+import DebugComponentVue from "@/components/__debugC__/DebugComponent.vue";
 </script>
 
 <style lang="scss" scoped>

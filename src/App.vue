@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <SiderBarComponent ref="sidebar" />
-    <div class="router" :style="routerStyle">
+    <div class="router">
       <RouterView class="sizeResitrict" />
     </div>
   </div>

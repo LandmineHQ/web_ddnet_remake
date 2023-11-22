@@ -11,7 +11,7 @@
                 </div>
                 <div class="name">{{ useUserInfoStore().name }}</div>
                 <div class="countryIcon">
-                    <img :src="`./src/assets/countryflags/${useUserInfoStore().country}.png`" alt="" srcset="">
+                    <img :src="countryIconSrcPath" alt="" srcset="">
                 </div>
             </div>
         </div>
@@ -195,6 +195,10 @@ watch(() => useUserInfoStore().skinSrcPath, (value) => {
     updateSkin(value)
 }, { deep: true })
 
+const countryIconSrcPath = computed(() => {
+    return `./img/countryflags/${useUserInfoStore().country}.png`
+})
+
 // toggle settings view
 const toggle = reactive({
     settings: false
@@ -206,8 +210,7 @@ defineExpose({
 
 // =================================================================
 
-function toggleSettings(e) {
-    console.log(e)
+function toggleSettings(e: MouseEvent) {
     toggle.settings = !toggle.settings
 }
 
@@ -242,7 +245,7 @@ function getCardProperties() {
     const mappersInfo = useUserInfoStore().mappersInfo as MappersData
     const authorInfo = useUserInfoStore().teedataAuthorInfo as TeeData_Author
 
-    if (!playersInfo) return cardProperties
+    if (!playersInfo || !mappersInfo || !authorInfo) return cardProperties
     // step 1: get progress.points & pointsRank
     cardProperties.progress.points.now = playersInfo.points ? playersInfo.points.points : 0
     cardProperties.progress.points.total = playersInfo.points ? playersInfo.points.total : 0
@@ -346,7 +349,7 @@ function updateProfileCard(oldObj: { [key: string]: any }, newObj: typeof oldObj
     position: relative;
 
     border-radius: 15px;
-    background: linear-gradient(180deg, #385A8D 0%, #385A8D 54.55%, rgba(56, 90, 141, 0.70) 85.55%, rgba(56, 90, 141, 0.00) 100%), url("@/assets/background/card-profile-bg-1.png"), #385A8D;
+    background: linear-gradient(180deg, #385A8D 0%, #385A8D 54.55%, rgba(56, 90, 141, 0.70) 85.55%, rgba(56, 90, 141, 0.00) 100%), url("./img/background/card-profile-bg-1.png"), #385A8D;
     box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.25);
 
     >* {
