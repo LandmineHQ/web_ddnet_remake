@@ -167,12 +167,11 @@ const { t } = useI18n()
 import { OnSVGRender, OnTeeSkinRender } from '@/tools/tee';
 import { watch } from 'vue';
 import gsap from 'gsap';
-import router from '@/router';
 import ProfileSettingsComponentVue from './ProfileSettingsComponent.vue';
 // get computed card properties & autoupdate
 const cardProperties = getCardProperties()
 watch(() => useUserInfoStore().stamp, () => {
-    console.log(router.currentRoute.value.name, `detected userinfo date stamp changed`)
+    console.log("ProfileCardComponent", `detected userinfo date stamp changed`)
     updateProfileCard(cardProperties, getCardProperties())
 })
 // format mini card properties
@@ -221,6 +220,7 @@ function toggleSettings(e: MouseEvent) {
  * maybe have no need any documentation
  */
 function getCardProperties() {
+    console.log("getCardProperties starting...")
     let cardProperties = reactive({
         progress: {
             map: {
@@ -301,6 +301,7 @@ function getCardProperties() {
         }
     }
     cardProperties.miniCard.releaseSkins = counts
+    console.log("getCardProperties done")
     return cardProperties
 }
 
@@ -364,7 +365,7 @@ function updateProfileCard(oldObj: { [key: string]: any }, newObj: typeof oldObj
     position: relative;
 
     border-radius: 15px;
-    background: linear-gradient(180deg, #385A8D 0%, #385A8D 54.55%, rgba(56, 90, 141, 0.70) 85.55%, rgba(56, 90, 141, 0.00) 100%), url("./img/background/card-profile-bg-1.png"), #385A8D;
+    background: linear-gradient(180deg, #385A8D 0%, #385A8D 54.55%, rgba(56, 90, 141, 0.70) 85.55%, rgba(56, 90, 141, 0.00) 100%), url("../../public/img/background/card-profile-bg-1.png"), #385A8D;
     box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.25);
 
     >* {
