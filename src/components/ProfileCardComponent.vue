@@ -150,9 +150,11 @@
                 </div>
             </div>
         </div>
-        <div class="profile--settings" v-if="toggle.settings">
-            <ProfileSettingsComponentVue @close="toggleSettings" />
-        </div>
+        <Transition name="profile--settings">
+            <div class="profile--settings" v-if="toggle.settings">
+                <ProfileSettingsComponentVue @close="toggleSettings" />
+            </div>
+        </Transition>
     </div>
 </template>
 
@@ -245,7 +247,7 @@ function getCardProperties() {
     const mappersInfo = useUserInfoStore().mappersInfo as MappersData
     const authorInfo = useUserInfoStore().teedataAuthorInfo as TeeData_Author
 
-    if (!playersInfo || !mappersInfo || !authorInfo) return cardProperties
+    if (!playersInfo) return cardProperties
     // step 1: get progress.points & pointsRank
     cardProperties.progress.points.now = playersInfo.points ? playersInfo.points.points : 0
     cardProperties.progress.points.total = playersInfo.points ? playersInfo.points.total : 0
@@ -289,12 +291,14 @@ function getCardProperties() {
     cardProperties.miniCard.pph = cardProperties.progress.points.now / (cardProperties.miniCard.totalTimeOfFinishingMaps / 3600)
     // step 5: get maps & skins
     let counts = 0
-    if (mappersInfo.authors) counts = mappersInfo.authors[useUserInfoStore().name]?.total as number
+    if (mappersInfo && mappersInfo.authors) counts = mappersInfo.authors[useUserInfoStore().name]?.total as number
     cardProperties.miniCard.releaseMaps = counts
     counts = 0
-    for (let key in authorInfo) {
-        const _count = authorInfo._count as { [key: string]: any }
-        counts += _count[key]
+    if (authorInfo) {
+        for (let key in authorInfo) {
+            const _count = authorInfo._count as { [key: string]: any }
+            counts += _count[key]
+        }
     }
     cardProperties.miniCard.releaseSkins = counts
     return cardProperties
@@ -340,6 +344,17 @@ function updateProfileCard(oldObj: { [key: string]: any }, newObj: typeof oldObj
     position: absolute;
     left: 64px;
     top: 72px;
+}
+
+.profile--settings-enter-from,
+.profile--settings-leave-to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0%);
+}
+
+.profile--settings-enter-active,
+.profile--settings-leave-active {
+    transition: all 0.1s ease-out;
 }
 
 .ddnet-card--profile {

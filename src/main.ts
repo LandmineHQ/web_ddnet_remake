@@ -8,13 +8,14 @@ import i18n from './i18n'
 import { autoUpdatePinia, pinia } from './stores'
 
 import UserIndexedDB from './stores/UserIndexedDB'
+import useUserInfoStore from './stores/user'
 
 const app = createApp(App)
 app.use(pinia)
 UserIndexedDB.getUser().then(res => {
     autoUpdatePinia()
     if (res === false) console.log("read failed")
-    console.log("read success")
+    if (!useUserInfoStore().isFirstComeIn) router.push({ name: "profile" })
 })
 app.use(router)
 app.use(i18n)

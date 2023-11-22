@@ -8,7 +8,7 @@ const config = {
     DDNET_SKINS_NORMAL_URI: "https://ddnet.org/skins/skin/",
     DDNET_SKINS_COMMUNITY_URI: "https://ddnet.org/skins/skin/community/",
 }
-if (import.meta.env.DEV) baseUrl = "https://localhost:3000"
+if (import.meta.env.DEV) baseUrl = "http://localhost:3000"
 config.DEAMON_PARSE_MAPPERS_URL = baseUrl + config.DEAMON_PARSE_MAPPERS_URL
 config.DEAMON_PROTOCOL_SKINS_URL = baseUrl + config.DEAMON_PROTOCOL_SKINS_URL
 config.TEEDATA_AUTHOR_URL = baseUrl + config.TEEDATA_AUTHOR_URL

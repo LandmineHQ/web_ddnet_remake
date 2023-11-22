@@ -53,6 +53,7 @@ async function freshSource() {
         for (const key in data) {
             useUserInfoStore().playerInfo[key] = data[key];
         }
+        if (!data.player) useUserInfoStore().playerInfo = {}
         console.log("fresh source successfully");
     }).catch((err) => {
         console.log("fresh source failed\n", err);

@@ -69,7 +69,8 @@ const emit = defineEmits(['close'])
 function close() {
     useUserInfoStore().name = inputs.name
     useUserInfoStore().skinName = inputs.skinName
-    useUserInfoStore().country = inputs.country
+    if (inputs.country.toLowerCase() === "default") useUserInfoStore().country = "default"
+    else useUserInfoStore().country = inputs.country.toUpperCase()
     emit('close')
 }
 </script>
@@ -191,6 +192,7 @@ function close() {
         &:nth-of-type(3) {
             >input {
                 width: 254px;
+                text-transform: uppercase;
             }
         }
     }
