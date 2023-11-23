@@ -42,7 +42,7 @@ type PlayerInfo = {
     last_finishes: Array<MapRecordLastFinished>
     favorite_partners: Array<{ name: string, finishes: number }>
     types: MapTypePoints
-    activity: Array<{ data: string, hours_played: number }>
+    activity: Array<{ date: string, hours_played: number }>
     hours_played_past_365_days: number
 }
 
