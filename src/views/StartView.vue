@@ -31,6 +31,9 @@ onUnmounted(() => {
 })
 
 // =================================================================
+/**
+ * when user click on the next button, then trigger this function
+ */
 function next() {
     if (name.value === "") useUserInfoStore().name = "nameless tee"
     else useUserInfoStore().name = name.value
@@ -64,6 +67,12 @@ function next() {
     border-radius: 5px;
     background: var(--BG-color-2, #FFF);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    transform: scale(0.95);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    &:hover {
+        transform: scale(1);
+    }
 
     >* {
         position: absolute;
@@ -142,6 +151,18 @@ function next() {
         letter-spacing: 4px;
         bottom: 108px;
         right: 44px;
+
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &:active {
+            transform: scale(0.95);
+            filter: hue-rotate(60deg);
+            opacity: 0.5;
+        }
     }
 
     >.info {

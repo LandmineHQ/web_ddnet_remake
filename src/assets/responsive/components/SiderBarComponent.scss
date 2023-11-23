@@ -1,3 +1,7 @@
 .ddnet-sidebar {
     height: 100vh !important;
 }
+
+.ddnet-sidebar.mobile {
+    position: absolute;
+}

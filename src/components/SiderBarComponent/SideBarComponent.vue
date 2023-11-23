@@ -1,6 +1,6 @@
 <template>
     <Transition name="ddnet-sidebar">
-        <div class="ddnet-sidebar" v-if="!useSideBarStore().hidden" ref="sidebar">
+        <div class="ddnet-sidebar" v-show="!useSideBarStore().hidden" ref="sidebar" :class="sidebarClass">
             <SiderBarLogo />
             <NewsItem />
             <UserProfileItem class="user-profile" />
@@ -13,11 +13,30 @@ import SiderBarLogo from "@/components/icons/SiderBarLogo.vue"
 import UserProfileItem from "@/components/SiderBarComponent/NavigatorItem/UserProfileItem.vue"
 import NewsItem from "@/components/SiderBarComponent/NavigatorItem/NewsItem.vue"
 import useSideBarStore from "@/stores/sidebar";
-import { ref } from "vue";
+import { ref, computed, onMounted, watch } from "vue";
 const sidebar = ref<HTMLDivElement>()
 
 defineExpose({
-    element: sidebar
+    $el: sidebar
+})
+const sidebarClass = computed(() => {
+    return {
+        "mobile": useSideBarStore().mobileMode,
+    }
+})
+
+watch(() => useSideBarStore().mobileMode, () => {
+    useSideBarStore().hidden = useSideBarStore().mobileMode
+})
+
+onMounted(() => {
+    window.addEventListener("resize", () => {
+        if (window.innerWidth < 750) {
+            useSideBarStore().mobileMode = true
+        } else if (useSideBarStore().mobileMode === true) {
+            useSideBarStore().mobileMode = false
+        }
+    })
 })
 </script>
 <style scoped lang="scss">

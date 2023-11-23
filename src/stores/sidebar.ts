@@ -3,7 +3,8 @@ import { ref } from "vue";
 
 
 const state = {
-    hidden: ref<boolean>(false)
+    hidden: ref<boolean>(false),
+    mobileMode: ref<boolean>(false),
 }
 
 const getters = {
