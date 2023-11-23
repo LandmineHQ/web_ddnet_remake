@@ -1,17 +1,21 @@
 <template>
     <div class="ddnet-view-profile">
         <ViewInstructionComponent>{{ $t("sidebar.userProfileItem.title") }}</ViewInstructionComponent>
-        <ProfileCardComponent />
+        <section class="main">
+            <ProfileCardComponent />
+            <DateDurationLineChartComponentVue />
+        </section>
         <FooterComponentVue />
         <DebugComponentVue />
     </div>
 </template>
 
 <script setup lang="ts">
-import ViewInstructionComponent from "@/components/ViewInstructionComponent.vue";
-import ProfileCardComponent from "@/components/ProfileCardComponent.vue";
-import FooterComponentVue from "@/components/FooterComponent.vue";
+import ViewInstructionComponent from "@/components/BaseViewInstructionComponent.vue";
+import ProfileCardComponent from "@/components/TheProfileCardComponent.vue";
+import FooterComponentVue from "@/components/BaseFooterComponent.vue";
 import DebugComponentVue from "@/components/__debugC__/DebugComponent.vue";
+import DateDurationLineChartComponentVue from "@/components/TheDateDurationLineChartComponent.vue";
 </script>
 
 <style lang="scss" scoped>
@@ -21,5 +25,11 @@ import DebugComponentVue from "@/components/__debugC__/DebugComponent.vue";
     gap: 20px;
     display: flex;
     flex-direction: column;
+}
+
+.ddnet-view-profile>.main {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
 }
 </style>@/stores/user
