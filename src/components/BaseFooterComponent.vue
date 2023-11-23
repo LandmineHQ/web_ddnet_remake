@@ -1,14 +1,14 @@
 <template>
-    <div class="ddnet-footer">
+    <footer class="ddnet-footer">
         <div class="text" v-for="(item, index) in footer" :key="index">
             <span class="content">{{ item.content }}</span>
         </div>
-    </div>
+    </footer>
 </template>
 
 <script setup lang="ts">
 const footer = [{ content: "@2023" },
-{ content: "Landmine地雷&shenyang" },
+{ content: "Landmine地雷&shengyan" },
 { content: "备案号备案号备案号备案号" },
 { content: "关于" },
 ]

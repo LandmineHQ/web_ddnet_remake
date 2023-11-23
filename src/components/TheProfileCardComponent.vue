@@ -167,7 +167,7 @@ const { t } = useI18n()
 import { OnSVGRender, OnTeeSkinRender } from '@/tools/tee';
 import { watch } from 'vue';
 import gsap from 'gsap';
-import ProfileSettingsComponentVue from './ProfileSettingsComponent.vue';
+import ProfileSettingsComponentVue from './TheProfileSettingsComponent.vue';
 // get computed card properties & autoupdate
 const cardProperties = getCardProperties()
 watch(() => useUserInfoStore().stamp, () => {
@@ -211,7 +211,7 @@ defineExpose({
 
 // =================================================================
 
-function toggleSettings(e: MouseEvent) {
+function toggleSettings() {
     toggle.settings = !toggle.settings
 }
 

@@ -5,8 +5,8 @@
     </div>
 </template>
 <script setup lang="ts">
-import AboutComponent from '@/components/AboutComponent.vue';
-import FooterComponent from '@/components/FooterComponent.vue';
+import AboutComponent from '@/components/BaseAboutComponent.vue';
+import FooterComponent from '@/components/BaseFooterComponent.vue';
 </script>
 <style scoped lang="scss">
 .ddnet-view-about {
