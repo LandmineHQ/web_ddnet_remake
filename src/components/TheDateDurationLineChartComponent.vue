@@ -41,7 +41,7 @@ function updateLineChart() {
                 const item = params as unknown as [{ value: typeof data[0] }]
                 const date = item[0].value[0]
                 const hours_played = item[0].value[1]
-                return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDay()} ${hours_played}h`
+                return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${hours_played}h`
             }
         },
         xAxis: {
