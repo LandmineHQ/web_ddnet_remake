@@ -16,7 +16,7 @@ import { computed } from 'vue';
 const sidebar = ref<InstanceType<typeof SiderBarComponent>>()
 const routerStyle = computed(() => {
   const sytleValue = {
-    "width": `calc(100vw - ${sidebar.value?.element?.getBoundingClientRect().width}px)`
+    "width": `calc(100vw - ${sidebar.value?.$el?.getBoundingClientRect().width}px)`
   } as StyleValue
   return sytleValue
 })
@@ -36,6 +36,7 @@ const routerStyle = computed(() => {
   >.router {
     overflow: auto;
     height: 100%;
+    width: 100%;
 
     >.sizeResitrict {
       min-height: 100%;
