@@ -295,9 +295,8 @@ function getCardProperties() {
     cardProperties.miniCard.releaseMaps = counts
     counts = 0
     if (authorInfo) {
-        for (let key in authorInfo) {
-            const _count = authorInfo._count as { [key: string]: any }
-            counts += _count[key]
+        for (let key in authorInfo._count) {
+            counts += authorInfo._count[key as keyof typeof authorInfo["_count"]]
         }
     }
     cardProperties.miniCard.releaseSkins = counts
