@@ -21,7 +21,9 @@
     border-radius: 10px;
     background: var(--BG-color-2, #FFF);
     box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.25);
+}
 
+.view-instruction {
     >.origin {
         display: inline;
         color: var(--Black, #000);

@@ -5,6 +5,7 @@
             <ProfileCardComponent />
             <DateDurationLineChartComponentVue />
         </section>
+        <BaseSectionPlaneComponent title="打卡记录" />
         <FooterComponentVue />
         <DebugComponentVue />
     </div>
@@ -16,6 +17,7 @@ import ProfileCardComponent from "@/components/TheProfileCardComponent.vue";
 import FooterComponentVue from "@/components/BaseFooterComponent.vue";
 import DebugComponentVue from "@/components/__debugC__/DebugComponent.vue";
 import DateDurationLineChartComponentVue from "@/components/TheDateDurationLineChartComponent.vue";
+import BaseSectionPlaneComponent from "@/components/BaseSectionPlaneComponent.vue";
 </script>
 
 <style lang="scss" scoped>
