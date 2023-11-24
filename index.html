@@ -62,13 +62,14 @@
     <span>loading</span>
   </div>
   <div id="ddnet-app"></div>
-  <script type="module" src="./src/main.ts"></script>
   <script>
     function hideLoaderMask() {
       let loaderMask = document.getElementById("loader-mask");
       loaderMask.remove();
     }
   </script>
+  <script type="module" src="./src/main.ts"></script>
+  <script src="https://unpkg.com/modern-screenshot"></script>
 </body>
 
 </html>

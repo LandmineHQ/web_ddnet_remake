@@ -1,5 +1,5 @@
 <template>
-    <div class="ddnet-card--profile">
+    <div class="ddnet-card--profile" ref="$el">
         <div class="top-left">
             <div class="title">
                 <span class="subtitle">profile</span>
@@ -52,7 +52,8 @@
             </svg>
             <div class="score">SSS</div>
             <div class="points">{{ Math.floor(cardProperties.progress.points.now / 1000) }}k</div>
-            <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29" fill="none">
+            <svg @click="shareProfile" xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29"
+                fill="none">
                 <g filter="url(#filter0_d_616_39267)">
                     <path fill-rule="evenodd" clip-rule="evenodd"
                         d="M21.5 6.5V14.5C21.5 16.7091 19.7091 18.5 17.5 18.5H9.5C7.29086 18.5 5.5 16.7091 5.5 14.5V6.5C5.5 4.29086 7.29086 2.5 9.5 2.5H17.5C19.7091 2.5 21.5 4.29086 21.5 6.5ZM7 6.5V14.5C7 15.163 7.26339 15.7989 7.73223 16.2678C8.20107 16.7366 8.83696 17 9.5 17H17.5C18.8807 17 20 15.8807 20 14.5V6.5C20 5.11929 18.8807 4 17.5 4H9.5C8.11929 4 7 5.11929 7 6.5Z"
@@ -168,6 +169,10 @@ import { OnSVGRender, OnTeeSkinRender } from '@/tools/tee';
 import { watch } from 'vue';
 import gsap from 'gsap';
 import ProfileSettingsComponentVue from './TheProfileSettingsComponent.vue';
+import { dataUrlToBlob } from 'modern-screenshot/types/utils.js';
+
+const $el = ref<HTMLDivElement>()
+
 // get computed card properties & autoupdate
 const cardProperties = getCardProperties()
 watch(() => useUserInfoStore().stamp, () => {
@@ -206,10 +211,27 @@ const toggle = reactive({
 })
 
 defineExpose({
-    cardProperties
+    cardProperties,
+    $el
 })
 
 // =================================================================
+
+function shareProfile() {
+    if ($el.value) {
+        // @ts-ignore
+        modernScreenshot.domToPng($el.value).then((dataUrl) => {
+            fetch(dataUrl)
+                .then(response => response.blob())
+                .then(blob => {
+                    const item = new ClipboardItem({ 'image/png': blob })
+                    navigator.clipboard.write([item])
+                })
+                .then(() => console.log('image copied to clipboard'))
+                .catch(err => console.log(err))
+        })
+    }
+}
 
 function toggleSettings() {
     toggle.settings = !toggle.settings
@@ -494,6 +516,10 @@ function updateProfileCard(oldObj: { [key: string]: any }, newObj: typeof oldObj
 
             top: 12px;
             right: 12px;
+
+            &:hover {
+                cursor: pointer;
+            }
         }
 
         &:nth-of-type(3) {

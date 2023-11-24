@@ -11,15 +11,7 @@
 import { RouterView } from 'vue-router';
 import SiderBarComponent from './components/SiderBarComponent/SideBarComponent.vue';
 import { ref } from 'vue';
-import type { StyleValue } from 'vue';
-import { computed } from 'vue';
 const sidebar = ref<InstanceType<typeof SiderBarComponent>>()
-const routerStyle = computed(() => {
-  const sytleValue = {
-    "width": `calc(100vw - ${sidebar.value?.$el?.getBoundingClientRect().width}px)`
-  } as StyleValue
-  return sytleValue
-})
 </script>
 
 <style scoped lang="scss">

@@ -18,6 +18,7 @@
     "echarts": "^5.4.3",
     "gsap": "^3.12.2",
     "idb-keyval": "^6.2.1",
+    "modern-screenshot": "^4.4.34",
     "moment": "^2.29.4",
     "pinia": "^2.1.4",
     "sass": "^1.69.5",
