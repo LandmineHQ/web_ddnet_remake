@@ -169,7 +169,6 @@ import { OnSVGRender, OnTeeSkinRender } from '@/tools/tee';
 import { watch } from 'vue';
 import gsap from 'gsap';
 import ProfileSettingsComponentVue from './TheProfileSettingsComponent.vue';
-import { dataUrlToBlob } from 'modern-screenshot/types/utils.js';
 
 const $el = ref<HTMLDivElement>()
 
