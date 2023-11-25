@@ -8,10 +8,10 @@
 <script setup lang="ts">
 import ddnetPack from "../../package.json";
 import languagePack from "../i18n/language/zh_cn.json"
-import { createMessage } from '@/hook/messages/hookMessages'
+import GlobalMessage from '@/hook/messages/index'
 
 function message() {
-    createMessage("hello world")
+    GlobalMessage.text("hello world")
 }
 </script>
 
