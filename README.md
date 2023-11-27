@@ -1,52 +1,91 @@
-# web_ddnet_remake
+## 介绍
 
-This template should help get you started developing with Vue 3 in Vite.
+本程序是关于DDracenetwork的辅助程序，具有查询游戏分数、排名等相关查询功能
 
-## Recommended IDE Setup
+## 使用说明
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+输入游戏id可以查询相关信息
 
-## Type Support for `.vue` Imports in TS
+## 目录
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+├─.eslintrc.cjs
+├─.hintrc
+├─.prettierrc.json
+├─env.d.ts
+├─index.html
+├─package-lock.json
+├─package.json
+├─README.md
+├─tsconfig.app.json
+├─tsconfig.json
+├─tsconfig.node.json
+├─tsconfig.vitest.json
+├─update.ts
+├─vite.config.ts
+├─vitest.config.ts
+├─src
+|  ├─App.vue
+|  ├─main.ts
+|  ├─views
+|  |   ├─InitView.vue
+|  |   └ProfileView.vue
+|  ├─tools
+|  |   ├─freshCountryFlags.ts
+|  |   ├─regions.d.ts
+|  |   ├─regions.json
+|  |   └tee.ts
+|  ├─stores
+|  |   ├─index.ts
+|  |   ├─sidebar.ts
+|  |   ├─type.d.ts
+|  |   ├─user.ts
+|  |   └UserIndexedDB.ts
+|  ├─router
+|  |   └index.ts
+|  ├─i18n
+|  |  ├─index.ts
+|  |  ├─language
+|  |  |    ├─en_us.json
+|  |  |    └zh_cn.json
+|  ├─components
+|  |     ├─AboutComponent.vue
+|  |     ├─FooterComponent.vue
+|  |     ├─ProfileCardComponent.vue
+|  |     ├─ViewInstructionComponent.vue
+|  |     ├─__tests__
+|  |     |     └HelloWorld.spec.ts
+|  |     ├─__debugC__
+|  |     |     └DebugComponent.vue
+|  |     ├─SiderBarComponent
+|  |     |         ├─SideBarComponent.vue
+|  |     |         ├─NavigatorItem
+|  |     |         |       ├─ItemComponent.vue
+|  |     |         |       ├─NewsItem.vue
+|  |     |         |       └UserProfileItem.vue
+|  |     ├─icons
+|  |     |   └SiderBarLogo.vue
+|  ├─axios
+|  |   ├─Mappers.ts
+|  |   ├─type.d.ts
+|  |   └URLConfig.ts
+|  ├─assets
+|  |   ├─base.css
+|  |   ├─main.css
+|  |   ├─svg
+|  |   |  └logo.svg
+|  |   ├─responsive
+|  |   |     ├─InitView.scss
+|  |   |     ├─SiderBarComponent.scss
+|  |   |     └ViewInstructionComponent.scss
+|  |   ├─countryflags
+|  |   ├─background
+├─public
+|   ├─favicon.ico
+|   ├─favicon.png
+|   ├─favicon~1.ico
+|   └loader.svg
+├─.vscode
+|    └extensions.json
+## 常见问题说明
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
 
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-npm run test:unit
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
