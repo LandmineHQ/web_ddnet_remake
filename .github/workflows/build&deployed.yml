@@ -1,0 +1,57 @@
+name: NodeJS with Vite
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x]
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Build
+      run: |
+        npm install
+        npm run build
+
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3.1.3
+      with:
+        # Artifact name
+        name: github-pages # optional, default is artifact
+        # A file, directory or wildcard pattern that describes what to upload
+        path: ${{ github.workspace }}/dist
+        # The desired behavior if no files are found using the provided path.
+
+    - name: Deploy GitHub Pages site
+      uses: actions/deploy-pages@v1.2.9
+      with:
+        # Should this action only emit build telemetry instead of deploying the build artifact?
+        # emit_telemetry: # optional, default is false
+        # The status of the previous build.
+        # conclusion: # optional
+        # GitHub token
+        # token: # default is ${{ github.token }}
+        # Time in milliseconds after which to timeout and cancel the deployment (default: 10 minutes)
+        # timeout: # optional, default is 600000
+        # Maximum number of status report errors before cancelling a deployment (default: 10)
+        # error_count: # optional, default is 10
+        # Time in milliseconds between two deployment status report (default: 5 seconds)
+        # reporting_interval: # optional, default is 5000
+        # Name of the artifact to deploy
+        artifact_name: github-pages # optional, default is github-pages
+        # Is this attempting to deploy a pull request as a GitHub Pages preview site? (NOTE: This feature is only in alpha currently and is not available to the public!)
+        # preview: # optional, default is false
