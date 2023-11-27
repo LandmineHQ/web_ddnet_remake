@@ -1,25 +1,44 @@
-# web_ddnet_remake
+## 介绍
 
-This template should help get you started developing with Vue 3 in Vite.
+本程序是关于DDracenetwork的辅助程序，具有查询游戏分数、排名等相关查询功能。
+this project aim at remaking the outdated web of https://ddnet.org by using vue3+ts+vite and other new technologies
+您可以在 DDNet 网站上获取二进制版本，在 Steam 上找到它或从存储库安装。
+## 使用说明
+
+输入游戏id可以查询相关信息
+
+## 目录
+
+├─index.html
+├─README.md
+├─update.ts
+├─src
+|  ├─App.vue
+|  ├─main.ts
+|  ├─views
+|  ├─tools
+|  ├─stores
+|  ├─router
+|  ├─i18n
+|  ├─components
+|  ├─axios
+|  ├─assets
+|  |   ├─svg
+|  |   ├─responsive
+|  |   ├─countryflags
+|  |   ├─background
+├─public
+|   ├─favicon.ico
+|   ├─favicon.png
+|   ├─favicon~1.ico
+|   └loader.svg
+## 常见问题说明
+
 
 ## Recommended IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
 
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
-
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
-
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
 
 ## Project Setup
 
@@ -31,6 +50,16 @@ npm install
 
 ```sh
 npm run dev
+```
+
+### Compile countries flags
+```sh
+npm run update
+```
+
+### Preview project
+```sh
+npm run preview
 ```
 
 ### Type-Check, Compile and Minify for Production
