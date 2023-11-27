@@ -35,9 +35,9 @@ this project aim at remaking the outdated web of https://ddnet.org by using vue3
 ## 常见问题说明
 
 
-## Recommended IDE Setup
+## 使用说明
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+输入游戏id可以查询相关信息
 
 
 ## Project Setup
