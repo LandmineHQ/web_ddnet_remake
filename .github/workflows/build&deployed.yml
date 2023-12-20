@@ -15,7 +15,8 @@ jobs:
         node-version: [20.9.x]
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout
+      uses: actions/checkout@v3
 
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
@@ -42,7 +43,7 @@ jobs:
   # Deployment job
   deploy:
     environment:
-      name: github-pages
+      name: artifact
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
